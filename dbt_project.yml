@@ -36,5 +36,10 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 
 models:
+  #project name, this comes from line 5
   jaffle_shop:
-    +materialized: table
+    #Everything inside models/marts will be materialized
+    marts:
+      materialized: table
+    staging:
+      materialized: view

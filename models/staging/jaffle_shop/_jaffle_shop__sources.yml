@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+  - name: jaffle_shop
+    database: dbt-tutorial
+    schema: jaffle_shop
+    # table should have a timestamp column. 
+    # in this case orders have a column called
+    # _etl_loaded_at
+    loaded_at_field: _etl_loaded_at
+    # show alarms or error based on data freshness
+    freshness:
+      warn_after: {count: 12, period: hour}
+      error_after: {count: 24, period: hour}
+    tables:
+      - name: customers
+        freshness: null
+      - name: orders
+
+  
+  - name: raw_jaffle_shop
+    database: raw
+    schema: jaffle_shop
+    tables:
+      - name: customers
+      - name: orders
